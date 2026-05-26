@@ -38,6 +38,6 @@ export const socials = {
   spotify: 'https://open.spotify.com/artist/6SUnlrJ5g6IWEukJww5TPl',
   appleMusic: 'https://music.apple.com/us/artist/cooljeff/1793515685',
   youtube: 'https://www.youtube.com/channel/UCW31UZJmtzJ1IksY1wxnYXw',
-  instagram: '#',
-  tiktok: '#',
+  instagram: 'https://www.instagram.com/cooljeff_the_music_guy/',
+  tiktok: 'https://www.tiktok.com/@cooljeff123ttv',
 };
