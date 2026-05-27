@@ -27,7 +27,22 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
+  // Close menu on route change
   useEffect(() => { setOpen(false); }, [pathname]);
+
+  // Body scroll lock + Escape key when mobile menu open
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e) => {
+      if (e.key === 'Escape') setOpen(false);
+    };
+    window.addEventListener('keydown', onKey);
+    document.body.style.overflow = 'hidden';
+    return () => {
+      window.removeEventListener('keydown', onKey);
+      document.body.style.overflow = '';
+    };
+  }, [open]);
 
   return (
     <header
@@ -83,8 +98,10 @@ export default function Navbar() {
         {/* Mobile toggle */}
         <button
           onClick={() => setOpen(!open)}
-          className="lg:hidden p-2 text-bone-50 hover:text-blood-400 transition"
-          aria-label="Toggle menu"
+          className="lg:hidden p-2 text-bone-50 hover:text-blood-400 transition-colors min-h-[44px] min-w-[44px] flex items-center justify-center"
+          aria-label={open ? 'Close menu' : 'Open menu'}
+          aria-expanded={open}
+          aria-controls="mobile-menu"
         >
           {open ? <HiX className="h-7 w-7" /> : <HiMenuAlt4 className="h-7 w-7" />}
         </button>
@@ -94,10 +111,11 @@ export default function Navbar() {
       <AnimatePresence>
         {open && (
           <motion.div
+            id="mobile-menu"
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.3 }}
+            transition={{ duration: 0.3, ease: 'easeOut' }}
             className="lg:hidden overflow-hidden border-t border-blood-700/30 bg-ink-1000/95 backdrop-blur-md"
           >
             <ul className="px-6 py-6 flex flex-col gap-5">
@@ -107,8 +125,8 @@ export default function Navbar() {
                   <li key={href}>
                     <Link
                       href={href}
-                      className={`flex items-baseline gap-3 text-2xl text-display tracking-wider ${
-                        active ? 'text-blood-400' : 'text-bone-50'
+                      className={`flex items-baseline gap-3 text-2xl text-display tracking-wider transition-colors ${
+                        active ? 'text-blood-400' : 'text-bone-50 hover:text-blood-400'
                       }`}
                     >
                       <span className="text-mono text-xs text-blood-500/70">{index}</span>
