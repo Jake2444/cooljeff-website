@@ -1,16 +1,27 @@
 import Link from 'next/link';
 import SectionHeader from '@/components/SectionHeader';
-import { HiCalendar } from 'react-icons/hi';
+import { HiCalendar, HiTicket } from 'react-icons/hi';
 
 export const metadata = {
   title: 'Live Shows',
   description: 'Upcoming live performances and tour dates from CoolJeff.',
 };
 
-const placeholders = [
-  { date: 'TBA', city: 'City — TBA',  venue: 'Venue Reveal Pending' },
-  { date: 'TBA', city: 'City — TBA',  venue: 'Venue Reveal Pending' },
-  { date: 'TBA', city: 'City — TBA',  venue: 'Venue Reveal Pending' },
+const upcomingTours = [
+  {
+    name: 'Newmarket Tour',
+    date: '2036',
+    city: 'Newmarket, ON',
+    venue: 'Venue Announcement Coming Soon',
+    status: 'Coming Soon',
+  },
+  {
+    name: 'Vaughan Tour',
+    date: '2026',
+    city: 'Vaughan, ON',
+    venue: 'Venue Announcement Coming Soon',
+    status: 'Coming Soon',
+  },
 ];
 
 export default function ShowsPage() {
@@ -20,16 +31,16 @@ export default function ShowsPage() {
         <SectionHeader
           tag="Tour"
           title="Live Shows / Upcoming Events"
-          subtitle="Live dates are being booked now. Drop your email below to be first in line when tickets go on sale."
+          subtitle="The live era is officially in motion. Newmarket and Vaughan tours are being booked now — drop your email below to be first when tickets drop."
         />
 
-        {/* Big "shows coming soon" panel */}
+        {/* Big tour announcement panel */}
         <div className="card-dark p-10 md:p-16 text-center relative overflow-hidden mb-12">
           <div className="absolute inset-0 bg-radial-blood opacity-50 pointer-events-none" />
           <div className="relative">
-            <span className="chip mb-6 inline-flex">No Shows Yet</span>
-            <h2 className="text-display text-6xl md:text-8xl text-glow mb-4">
-              Shows Coming Soon
+            <span className="chip mb-6 inline-flex">2026 Tours Incoming</span>
+            <h2 className="text-display text-5xl md:text-7xl text-glow mb-4 leading-tight">
+              Newmarket + Vaughan<br />Tour Coming Soon
             </h2>
             <p className="text-bone-300 text-lg max-w-2xl mx-auto leading-relaxed">
               The live era is being built. First dates will be announced across
@@ -53,31 +64,33 @@ export default function ShowsPage() {
           </div>
         </div>
 
-        {/* Tour date placeholders */}
-        <div className="space-y-3">
-          <span className="section-tag mb-4">Pending Announcements</span>
-          {placeholders.map((show, i) => (
+        {/* Upcoming Tours */}
+        <div className="space-y-4">
+          <span className="section-tag mb-4">Upcoming Tour Stops</span>
+          {upcomingTours.map((show, i) => (
             <div
               key={i}
-              className="card-dark p-5 md:p-6 flex flex-col md:flex-row md:items-center justify-between gap-4 group"
+              className="card-dark p-6 md:p-7 flex flex-col md:flex-row md:items-center justify-between gap-4"
             >
               <div className="flex items-center gap-5">
-                <div className="flex flex-col items-center justify-center w-16 h-16 rounded border border-blood-700/40 bg-ink-1000/60 flex-shrink-0">
+                <div className="flex flex-col items-center justify-center w-20 h-20 rounded border border-blood-500/40 bg-ink-1000/60 flex-shrink-0">
                   <HiCalendar className="h-5 w-5 text-blood-400 mb-1" />
-                  <span className="text-mono text-[10px] text-bone-400">{show.date}</span>
+                  <span className="text-mono text-[11px] text-bone-300">{show.date}</span>
                 </div>
                 <div>
-                  <h3 className="text-display text-2xl">{show.city}</h3>
-                  <p className="text-bone-400 text-sm">{show.venue}</p>
+                  <h3 className="text-display text-2xl md:text-3xl">{show.name}</h3>
+                  <p className="text-bone-400 text-sm mt-1">{show.city}</p>
+                  <p className="text-bone-500 text-xs mt-1">{show.venue}</p>
                 </div>
               </div>
-              <div className="flex items-center gap-3">
-                <span className="chip border-bone-600/30 text-bone-400">Coming Soon</span>
+              <div className="flex items-center gap-3 flex-wrap">
+                <span className="chip border-blood-500/40 text-blood-400">{show.status}</span>
                 <button
                   disabled
-                  className="btn-glow opacity-40 cursor-not-allowed"
+                  className="btn-glow opacity-50 cursor-not-allowed flex items-center gap-2"
                 >
-                  Tickets TBA
+                  <HiTicket className="h-4 w-4" />
+                  Tickets Coming Soon
                 </button>
               </div>
             </div>
