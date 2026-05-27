@@ -10,7 +10,7 @@ export const metadata = {
 const upcomingTours = [
   {
     name: 'Newmarket Tour',
-    date: '2036',
+    date: '2026',
     city: 'Newmarket, ON',
     venue: 'Venue Announcement Coming Soon',
     status: 'Coming Soon',
