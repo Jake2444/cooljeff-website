@@ -24,7 +24,7 @@ export default function ScrollProgress() {
       <div
         className="h-full bg-blood-bright transition-[width] duration-150 ease-out"
         style={{
-          width: ${progress}%,
+          width: progress + '%',
           boxShadow: '0 0 10px rgba(255,31,58,0.6)',
         }}
       />
