@@ -9,14 +9,14 @@ export default function ScrollReveal({
 }) {
   return (
     <motion.div
-      initial={{ opacity: 0, scale: 0.5, y: 100 }}
+      initial={{ opacity: 0, scale: 0.88, y: 50 }}
       whileInView={{ opacity: 1, scale: 1, y: 0 }}
-      viewport={{ once: false, amount: 0.3 }}
+      viewport={{ once: true, amount: 0.2 }}
       transition={{
         type: 'spring',
-        stiffness: 110,
-        damping: 13,
-        mass: 0.9,
+        stiffness: 120,
+        damping: 16,
+        mass: 0.8,
         delay,
       }}
       className={className}
