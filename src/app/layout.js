@@ -2,6 +2,7 @@ import { Anton, Manrope, JetBrains_Mono } from 'next/font/google';
 import './globals.css';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import AmbientBackground from '@/components/AmbientBackground';
 import LoadingScreen from '@/components/LoadingScreen';
 import CursorSpotlight from '@/components/CursorSpotlight';
 import ScrollProgress from '@/components/ScrollProgress';
@@ -64,13 +65,19 @@ export const viewport = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en" className={`${anton.variable} ${manrope.variable} ${jetbrains.variable}`}>
-      <body>
+      <body className="vignette">
         <ScrollProgress />
         <CursorSpotlight />
         <LoadingScreen />
-        <Navbar />
-        <main className="min-h-screen">{children}</main>
-        <Footer />
+        <div className="cinema-backdrop pointer-events-none" />
+        <AmbientBackground />
+        <div className="noise-overlay pointer-events-none" />
+        <div className="grain-overlay pointer-events-none" />
+        <div className="relative z-10">
+          <Navbar />
+          <main className="min-h-screen">{children}</main>
+          <Footer />
+        </div>
       </body>
     </html>
   );
