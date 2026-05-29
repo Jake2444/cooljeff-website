@@ -3,6 +3,8 @@ import './globals.css';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import LoadingScreen from '@/components/LoadingScreen';
+import CursorSpotlight from '@/components/CursorSpotlight';
+import ScrollProgress from '@/components/ScrollProgress';
 
 const anton = Anton({
   subsets: ['latin'],
@@ -63,6 +65,8 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" className={`${anton.variable} ${manrope.variable} ${jetbrains.variable}`}>
       <body>
+        <ScrollProgress />
+        <CursorSpotlight />
         <LoadingScreen />
         <Navbar />
         <main className="min-h-screen">{children}</main>
