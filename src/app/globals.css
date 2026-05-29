@@ -3,10 +3,10 @@
 @tailwind utilities;
 
 :root {
-  --bg:           #050203;
-  --bg-soft:      #0a0205;
-  --surface:      #110407;
-  --surface-2:    #18070b;
+  --bg:           #000000;
+  --bg-soft:      #050203;
+  --surface:      #0c0407;
+  --surface-2:    #14060a;
   --blood:        #c8102e;
   --blood-bright: #ff1f3a;
   --blood-deep:   #5a0612;
@@ -22,11 +22,11 @@
 
 html {
   scroll-behavior: smooth;
-  background: var(--bg);
+  background: #000000;
 }
 
 body {
-  background: var(--bg);
+  background: #000000;
   color: var(--bone);
   font-family: var(--font-manrope), system-ui, sans-serif;
   overflow-x: hidden;
@@ -39,7 +39,7 @@ body {
 }
 
 ::-webkit-scrollbar { width: 10px; height: 10px; }
-::-webkit-scrollbar-track { background: #06010299; }
+::-webkit-scrollbar-track { background: #00000099; }
 ::-webkit-scrollbar-thumb {
   background: linear-gradient(180deg, var(--blood-deep), var(--blood));
   border-radius: 999px;
@@ -51,11 +51,7 @@ body {
   inset: 0;
   z-index: 0;
   pointer-events: none;
-  background:
-    radial-gradient(60% 50% at 20% 10%, rgba(200,16,46,0.18), transparent 70%),
-    radial-gradient(45% 40% at 85% 80%, rgba(255,31,58,0.10), transparent 70%),
-    radial-gradient(80% 60% at 50% 110%, rgba(90,6,18,0.55), transparent 65%),
-    linear-gradient(180deg, #050203 0%, #08020399 50%, #050203 100%);
+  background: #000000;
 }
 
 .grain-overlay {
@@ -66,13 +62,13 @@ body {
   background-image:
     repeating-linear-gradient(
       0deg,
-      rgba(255,255,255,0.018) 0px,
-      rgba(255,255,255,0.018) 1px,
+      rgba(255,255,255,0.012) 0px,
+      rgba(255,255,255,0.012) 1px,
       transparent 1px,
       transparent 3px
     );
   mix-blend-mode: overlay;
-  opacity: 0.6;
+  opacity: 0.4;
 }
 
 .noise-overlay {
@@ -80,8 +76,8 @@ body {
   inset: 0;
   z-index: 1;
   pointer-events: none;
-  opacity: 0.18;
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.6   0 0 0 0 0.05  0 0 0 0 0.08  0 0 0 0.6 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  opacity: 0;
+  display: none;
 }
 
 .vignette::after {
@@ -90,7 +86,7 @@ body {
   inset: 0;
   z-index: 1;
   pointer-events: none;
-  background: radial-gradient(ellipse at center, transparent 50%, rgba(0,0,0,0.6) 100%);
+  background: radial-gradient(ellipse at center, transparent 55%, rgba(0,0,0,0.7) 100%);
 }
 
 .text-display {
@@ -179,9 +175,7 @@ body {
   gap: 0.5rem;
   padding: 0.35rem 0.75rem;
   border: 1px solid rgba(200,16,46,0.4);
-  background: rgba(200,16,46,0.06);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  background: rgba(200,16,46,0.08);
   color: var(--bone);
   border-radius: 999px;
   font-family: var(--font-jetbrains), monospace;
@@ -202,12 +196,11 @@ body {
   font-size: 0.92rem;
   border: 1px solid var(--blood);
   background: linear-gradient(180deg, rgba(200,16,46,0.18), rgba(90,6,18,0.6));
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
   color: var(--bone);
   border-radius: 4px;
   transition: all 0.3s ease;
   overflow: hidden;
+  cursor: pointer;
 }
 .btn-glow::before {
   content: '';
@@ -235,13 +228,11 @@ body {
 
 .card-dark {
   position: relative;
-  background: linear-gradient(180deg, rgba(24,7,11,0.55), rgba(10,2,5,0.55));
-  backdrop-filter: blur(16px) saturate(140%);
-  -webkit-backdrop-filter: blur(16px) saturate(140%);
-  border: 1px solid rgba(200,16,46,0.22);
+  background: linear-gradient(180deg, rgba(15,5,8,0.92), rgba(8,2,4,0.95));
+  border: 1px solid rgba(200,16,46,0.2);
   border-radius: 6px;
   overflow: hidden;
-  transition: all 0.4s ease;
+  transition: border-color 0.4s ease, transform 0.4s ease, box-shadow 0.4s ease;
 }
 .card-dark::before {
   content: '';
@@ -258,9 +249,9 @@ body {
   pointer-events: none;
 }
 .card-dark:hover {
-  transform: translateY(-4px);
+  transform: translateY(-3px);
   border-color: rgba(255,31,58,0.5);
-  box-shadow: 0 20px 60px -20px rgba(255,31,58,0.4), 0 0 0 1px rgba(255,31,58,0.15);
+  box-shadow: 0 20px 60px -20px rgba(255,31,58,0.4);
 }
 .card-dark:hover::before { opacity: 1; }
 
@@ -276,22 +267,20 @@ body {
 .field {
   width: 100%;
   background: rgba(255,255,255,0.035);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
   border: 1px solid rgba(245,230,232,0.14);
   border-radius: 4px;
   padding: 0.85rem 1rem;
   color: var(--bone);
   font-family: var(--font-manrope), sans-serif;
   font-size: 0.95rem;
-  transition: all 0.3s ease;
+  transition: border-color 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;
 }
 .field::placeholder { color: rgba(160,133,137,0.55); }
 .field:focus {
   outline: none;
   border-color: var(--blood-bright);
   background: rgba(200,16,46,0.07);
-  box-shadow: 0 0 0 4px rgba(255,31,58,0.12), 0 0 30px rgba(255,31,58,0.25);
+  box-shadow: 0 0 0 3px rgba(255,31,58,0.10), 0 0 20px rgba(255,31,58,0.15);
 }
 .field:focus::placeholder { color: rgba(160,133,137,0.35); }
 
