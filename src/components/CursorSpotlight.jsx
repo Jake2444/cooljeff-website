@@ -7,7 +7,6 @@ export default function CursorSpotlight() {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
-    // Skip on touch devices (no cursor)
     const isTouch = window.matchMedia('(pointer: coarse)').matches;
     if (isTouch) return;
 
@@ -25,13 +24,17 @@ export default function CursorSpotlight() {
     };
   }, []);
 
+  const bgStyle =
+    'radial-gradient(600px circle at ' + pos.x + 'px ' + pos.y +
+    'px, rgba(255,31,58,0.10), transparent 50%)';
+
   return (
     <div
       aria-hidden="true"
       className="fixed inset-0 pointer-events-none z-[2] transition-opacity duration-300"
       style={{
         opacity: visible ? 1 : 0,
-        background: radial-gradient(600px circle at ${pos.x}px ${pos.y}px, rgba(255,31,58,0.10), transparent 50%),
+        background: bgStyle,
       }}
     />
   );
