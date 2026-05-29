@@ -2,8 +2,8 @@ import { Anton, Manrope, JetBrains_Mono } from 'next/font/google';
 import './globals.css';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import AmbientBackground from '@/components/AmbientBackground';
 import LoadingScreen from '@/components/LoadingScreen';
+
 const anton = Anton({
   subsets: ['latin'],
   weight: '400',
@@ -22,6 +22,7 @@ const jetbrains = JetBrains_Mono({
   variable: '--font-jetbrains',
   display: 'swap',
 });
+
 export const metadata = {
   metadataBase: new URL('https://cooljeff.com'),
   title: {
@@ -51,25 +52,21 @@ export const metadata = {
   },
   robots: { index: true, follow: true },
 };
+
 export const viewport = {
   themeColor: '#050203',
   width: 'device-width',
   initialScale: 1,
 };
+
 export default function RootLayout({ children }) {
   return (
     <html lang="en" className={`${anton.variable} ${manrope.variable} ${jetbrains.variable}`}>
-      <body className="vignette">
+      <body>
         <LoadingScreen />
-        <div className="cinema-backdrop pointer-events-none" />
-        <AmbientBackground />
-        <div className="noise-overlay pointer-events-none" />
-        <div className="grain-overlay pointer-events-none" />
-        <div className="relative z-10">
-          <Navbar />
-          <main className="min-h-screen">{children}</main>
-          <Footer />
-        </div>
+        <Navbar />
+        <main className="min-h-screen">{children}</main>
+        <Footer />
       </body>
     </html>
   );
