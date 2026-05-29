@@ -1,19 +1,39 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useRef } from 'react';
 
 export default function ScrollProgress() {
-  const [progress, setProgress] = useState(0);
+  const barRef = useRef(null);
 
   useEffect(() => {
-    const onScroll = () => {
+    const el = barRef.current;
+    if (!el) return;
+
+    let ticking = false;
+    let rafId;
+
+    const update = () => {
       const total = document.documentElement.scrollHeight - window.innerHeight;
       const current = window.scrollY;
-      setProgress(total > 0 ? (current / total) * 100 : 0);
+      const progress = total > 0 ? (current / total) * 100 : 0;
+      el.style.width = progress + '%';
+      ticking = false;
     };
-    onScroll();
+
+    const onScroll = () => {
+      if (!ticking) {
+        rafId = requestAnimationFrame(update);
+        ticking = true;
+      }
+    };
+
+    update();
     window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
+
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      if (rafId) cancelAnimationFrame(rafId);
+    };
   }, []);
 
   return (
@@ -22,9 +42,10 @@ export default function ScrollProgress() {
       className="fixed top-0 left-0 right-0 h-[2px] bg-blood-bright/15 z-[60]"
     >
       <div
-        className="h-full bg-blood-bright transition-[width] duration-150 ease-out"
+        ref={barRef}
+        className="h-full bg-blood-bright"
         style={{
-          width: progress + '%',
+          width: '0%',
           boxShadow: '0 0 10px rgba(255,31,58,0.6)',
         }}
       />
